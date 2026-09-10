@@ -22,7 +22,6 @@ RUN pip install --upgrade pip && pip install -e ".[dev]" \
 
 RUN mkdir -p /app/data
 
-VOLUME ["/app/data"]
 
 EXPOSE 8080
 
