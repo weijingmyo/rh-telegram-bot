@@ -129,13 +129,14 @@ docker compose up -d --build
 
 ## 7×24 云部署
 
-### Railway
+### Railway（一键 / Docker）
 
-1. New Project → Deploy from GitHub/本地
-2. 添加 **Volume**，挂载到 `/app/data`
-3. 环境变量粘贴 `.env` 内容
-4. Start Command：`python -m src`
-5. Healthcheck Path：`/health`，端口 `8080`
+仓库已含 `railway.toml`（Dockerfile 构建 + `/health` 检查）。
+
+1. 在 [Railway](https://railway.app) 连接本仓库（New Project → Deploy from GitHub）
+2. 设置环境变量：`TELEGRAM_BOT_TOKEN`、`TWITTER_BEARER_TOKEN`、`GMGN_API_KEY`、`SCAN_CHAINS=robinhood`（其余见 `.env.example`）
+3. 添加 **Volume**，挂载到 `/app/data`（持久化 SQLite）
+4. 部署后确认 Healthcheck：`/health`，端口 `8080`
 
 ### Render
 
