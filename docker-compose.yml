@@ -1,0 +1,20 @@
+services:
+  rh-telegram-bot:
+    build: .
+    container_name: rh-telegram-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      DATABASE_PATH: /app/data/bot.db
+      HEALTH_HOST: 0.0.0.0
+      HEALTH_PORT: 8080
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
